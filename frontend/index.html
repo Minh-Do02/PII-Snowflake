@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>RGPD – Anonymisation Note Fiscale</title>
+    <style>
+        body { font-family: Arial; margin: 40px }
+        button { padding: 10px 20px; margin-top: 20px }
+        #downloads { display: none; margin-top: 30px }
+    </style>
+</head>
+<body>
+
+<h2>🔐 Anonymisation RGPD – Note Fiscale</h2>
+
+<input type="file" id="fileInput" accept=".docx" />
+<br/>
+<button onclick="upload()">Anonymiser</button>
+
+<div id="downloads">
+    <hr>
+    <h3>📥 Téléchargement</h3>
+    <ul>
+        <li><a id="anonLink" href="#">📄 Note fiscale anonymisée</a></li>
+        <li><a id="mapLink" href="#">🗂️ Mapping RGPD</a></li>
+    </ul>
+</div>
+
+<script>
+async function upload() {
+    const file = document.getElementById("fileInput").files[0];
+    if (!file) {
+        alert("Veuillez sélectionner un fichier DOCX");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/anonymize", {
+        method: "POST",
+        body: formData
+    });
+
+    if (!response.ok) {
+        alert("Erreur lors de l'anonymisation");
+        return;
+    }
+
+    const data = await response.json();
+
+    document.getElementById("anonLink").href = "/download/" + data.anonymized_file;
+    document.getElementById("mapLink").href = "/download/" + data.mapping_file;
+
+    document.getElementById("downloads").style.display = "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# ENV / Virtual environment
+venv/
+.env
+*.env
+
+# =========================
+# FastAPI / backend
+# =========================
+backend/outputs/
+*.log
+
+# =========================
+# Frontend
+# =========================
+frontend/node_modules/
+frontend/.cache/
+
+# =========================
+# VSCode / MacOS / JetBrains
+# =========================
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# =========================
+# Hugging Face / Transformers
+# =========================
+.cache/
+transformers/
+torch/

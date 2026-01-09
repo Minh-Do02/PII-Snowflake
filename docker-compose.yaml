@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  rgpd-anonymizer:
+    build: .
+    container_name: rgpd-anonymizer
+    ports:
+      - "8000:8000"
+    environment:
+      - FERNET_KEY=${FERNET_KEY}
+    volumes:
+      - ./outputs:/app/outputs
+    restart: unless-stopped
