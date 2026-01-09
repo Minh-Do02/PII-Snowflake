@@ -18,7 +18,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForTokenClassificatio
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi import Request
-
+import mlflow
 
 # =====================================================
 # CONFIGURATION
@@ -266,3 +266,14 @@ def download(filename: str):
     if not os.path.exists(path):
         raise HTTPException(status_code=404)
     return FileResponse(path, filename=filename)
+
+
+# =====================================================
+# DOWNLOAD
+# =====================================================
+mlflow.set_tracking_uri("http://mlflow:5000")
+mlflow.start_run()
+mlflow.log_param("request_id", request_id)
+mlflow.log_metric("pii_count", len(spans_sorted))
+mlflow.end_run()
+

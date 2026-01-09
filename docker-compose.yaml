@@ -1,13 +1,26 @@
-version: "3.9"
+version: '3.9'
 
 services:
-  rgpd-anonymizer:
-    build: .
-    container_name: rgpd-anonymizer
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: rgpd_backend
     ports:
       - "8000:8000"
     environment:
-      - FERNET_KEY=${FERNET_KEY}
+      - FERNET_KEY=replace_with_your_generated_key
     volumes:
-      - ./outputs:/app/outputs
+      - ./backend/outputs:/app/outputs
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: rgpd_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
     restart: unless-stopped

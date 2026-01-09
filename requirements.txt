@@ -9,6 +9,7 @@ presidio-anonymizer
 faker
 python-docx
 pandas
+mlflow
 
 transformers
 torch
