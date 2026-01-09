@@ -73,6 +73,10 @@ project/
 - **Docker** : Conteneurs séparés pour backend et frontend  
 - **Env** : `.env` pour clés et secrets  
 
+## Interface 
+
+
+![UI](Interface_UI.png)
 ---
 
 ## Expérimentations / Modèles
